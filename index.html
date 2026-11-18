@@ -183,6 +183,81 @@
 #intro .hint{display:none}
 @keyframes homeBreath{50%{opacity:.4;transform:scale(1.07)}}
 @media(max-width:600px){#intro .home-group{gap:20px}}
+
+/* Step 5: tightly tiled panoramic photo globe inspired by the reference. */
+#sphereScene .sphere-wrap{perspective:1450px;overflow:hidden}
+#sphereScene .sphere{transform-style:preserve-3d;will-change:transform;animation:spinRight 34s linear infinite}
+#sphereScene .sphere-tile{box-sizing:border-box;backface-visibility:hidden;overflow:hidden;box-shadow:0 0 3px #ffb5c866;border:1px solid #f3b7b8aa!important;border-radius:1px!important}
+#sphereScene .sphere-tile img{width:100%;height:100%;object-fit:cover}
+@keyframes spinRight{from{transform:rotateX(-8deg) rotateY(0deg)}to{transform:rotateX(-8deg) rotateY(360deg)}}
+#gallery .rows{inset:7% 0;gap:clamp(12px,2vh,22px);justify-content:space-evenly;overflow:hidden}
+#gallery .lane{height:30%;gap:0;flex-shrink:0;animation:galleryLoop 24s linear infinite;animation-delay:0s;align-self:flex-start}
+#gallery .lane:nth-child(2){animation-duration:27s;animation-delay:-9s}
+#gallery .lane:nth-child(3){animation-duration:25s;animation-delay:-16s}
+#gallery .lane-group{display:flex;align-items:center;gap:clamp(14px,2.3vw,30px);padding-right:clamp(14px,2.3vw,30px);height:100%;flex:none}
+#gallery .lane-group img{height:100%;width:auto;aspect-ratio:3/4;object-fit:cover;flex:none;border-radius:13px;box-shadow:0 0 24px #ff6cbb55;cursor:pointer}
+@keyframes galleryLoop{to{transform:translateX(-50%)}}
+@media(max-width:600px){#gallery .rows{inset:8% 0;gap:12px}#gallery .lane{height:29%}#gallery .lane-group{gap:12px;padding-right:12px}#gallery .lane-group img{border-radius:9px}}
+
+/* Step 6 — full-screen curved mosaic matching the supplied reference. */
+#gallery{overflow:hidden;background:radial-gradient(ellipse at center,#241020 0%,#090511 82%)}
+#gallery .rows{inset:-7% -3%;gap:8px;justify-content:center;overflow:hidden;transform:rotate(-1deg) scale(1.035)}
+#gallery .lane{height:36%;gap:0;flex:none;align-self:flex-start;animation:galleryLoop 32s linear infinite;filter:drop-shadow(0 0 8px #ec91b14d)}
+#gallery .lane:nth-child(2){animation-duration:35s;animation-delay:-14s;transform-origin:center}
+#gallery .lane:nth-child(3){animation-duration:33s;animation-delay:-23s}
+#gallery .lane-group{height:100%;gap:9px;padding-right:9px;align-items:stretch;flex:none}
+#gallery .lane-group img{height:100%;width:clamp(180px,23.5vw,410px);aspect-ratio:auto;object-fit:cover;flex:none;box-sizing:border-box;border:5px solid #916073;border-radius:17px;box-shadow:0 0 0 2px #b67d9455,0 0 19px #e9a0b43b;transition:filter .25s,scale .25s}
+#gallery .lane-group img:hover{scale:1.025;filter:brightness(1.1)}
+@media(max-width:600px){#gallery .rows{inset:-5% -6%;gap:6px;transform:rotate(-1deg) scale(1.025)}#gallery .lane{height:36%}#gallery .lane-group{gap:6px;padding-right:6px}#gallery .lane-group img{width:clamp(140px,52vw,250px);border-width:4px;border-radius:12px}}
+/* Step 1: starfield composition and home matching the supplied screenshot. */
+#intro .glow{top:65%;width:12px;height:12px;background:radial-gradient(circle,#fff 0%,#fff4f9 34%,#ffc7e0 75%,#fda2ca 100%);box-shadow:0 0 8px 3px #fff8,0 0 24px 10px #ffc5de77,0 0 58px 25px #ffa1c540,0 0 110px 42px #f98db31c}
+#intro .home-group{bottom:max(36px,env(safe-area-inset-bottom) + 24px);gap:16px}
+#intro .home-label{font-size:clamp(13px,1.2vw,17px);letter-spacing:.14em;color:#f6b5d2;text-shadow:0 0 10px #ff8ebaa8}
+#intro .home{width:clamp(55px,5.2vw,62px);height:clamp(55px,5.2vw,62px);border-color:#f3a7ca69;box-shadow:0 0 8px #ffb7d777,0 0 22px #ff91bf44,inset 0 0 12px #f6a4c22e}
+@media(max-width:600px){#intro .glow{top:58%}#intro .home-group{bottom:max(36px,env(safe-area-inset-bottom) + 24px)}}
+
+/* Bước 7: ảnh kỷ niệm trôi ngang qua phong bì như ảnh mẫu.
+   Lớp ảnh không bắt sự kiện chuột, nên phong bì bên dưới vẫn mở được. */
+#giftScene .curtain{z-index:5;pointer-events:none!important;overflow:hidden;isolation:auto}
+#giftScene .curtain, #giftScene .curtain *{pointer-events:none!important}
+#giftScene .side{position:absolute;top:0;height:100%;width:clamp(190px,47vw,650px);overflow:visible;mask-image:none;-webkit-mask-image:none}
+#giftScene .side.left{left:0;right:auto}
+#giftScene .side.right{right:0;left:auto}
+#giftScene .memory-unit{padding:12px 0;transition:none}
+#giftScene .memory-unit img{width:clamp(132px,58%,245px);aspect-ratio:3/4;border-radius:12px;box-shadow:0 0 15px #fca0ce8c,0 0 28px #ef73b766}
+#giftScene .side.left .memory-unit:nth-child(3n+2){transform:translateX(22%)}
+#giftScene .side.left .memory-unit:nth-child(3n){transform:translateX(48%)}
+#giftScene .side.right .memory-unit:nth-child(3n+1){transform:translateX(-24%)}
+#giftScene .side.right .memory-unit:nth-child(3n+2){transform:translateX(-48%)}
+#giftScene .gift-center{z-index:3;pointer-events:none}
+#giftScene .gift-center #gift{pointer-events:auto;cursor:pointer}
+#giftScene .reference-envelope{filter:drop-shadow(0 0 16px #ff82b7);}
+.letter-overlay{z-index:30}
+@media(max-width:600px){
+ #giftScene .side{width:51vw}
+ #giftScene .memory-unit{padding:9px 0}
+ #giftScene .memory-unit img{width:clamp(90px,69%,165px)}
+ #giftScene .side.left .memory-unit:nth-child(3n){transform:translateX(28%)}
+ #giftScene .side.right .memory-unit:nth-child(3n+2){transform:translateX(-28%)}
+}
+
+/* Bước 7 — bố cục ký ức theo ảnh tham chiếu, nền không gian hồng. */
+#giftScene{isolation:isolate;background:radial-gradient(ellipse 64% 48% at 50% 54%,rgba(153,35,110,.19),transparent 75%),radial-gradient(ellipse 75% 70% at 50% 90%,rgba(255,84,175,.12),transparent 82%)}
+#giftScene::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,#ff9ad7 0.65px,transparent 1.2px),radial-gradient(circle,#ff4caa 0.8px,transparent 1.5px),radial-gradient(circle,#ffe1f3 0.5px,transparent 1.2px);background-size:29px 37px,61px 73px,113px 107px;background-position:0 0,17px 29px,51px 11px;opacity:.44;animation:giftStarDrift 26s linear infinite}
+#giftScene::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 40% 32% at 50% 48%,rgba(255,117,195,.14),transparent 100%);animation:giftNebula 7s ease-in-out infinite alternate}
+@keyframes giftStarDrift{to{background-position:29px 74px,78px 102px,164px 118px}}
+@keyframes giftNebula{to{opacity:.45;transform:scale(1.13)}}
+#giftScene .curtain{z-index:2;overflow:hidden}
+#giftScene .gift-center{z-index:6}
+#giftScene .side{width:clamp(200px,44vw,620px)}
+#giftScene .memory-unit{padding:9px 0}
+#giftScene .memory-unit img{width:clamp(135px,55%,245px);border:2px solid rgba(255,175,215,.7);box-shadow:0 0 10px #ffb4d68a,0 0 25px #ff5bad5c}
+#giftScene .side.left .memory-unit:nth-child(3n+2){transform:translateX(13%)}
+#giftScene .side.left .memory-unit:nth-child(3n){transform:translateX(30%)}
+#giftScene .side.right .memory-unit:nth-child(3n+1){transform:translateX(-13%)}
+#giftScene .side.right .memory-unit:nth-child(3n+2){transform:translateX(-30%)}
+@media(max-width:600px){#giftScene .side{width:50vw}#giftScene .memory-unit img{width:clamp(90px,67%,165px)}#giftScene .side.left .memory-unit:nth-child(3n){transform:translateX(18%)}#giftScene .side.right .memory-unit:nth-child(3n+2){transform:translateX(-18%)}}
+@media(prefers-reduced-motion:reduce){#giftScene::before,#giftScene::after{animation:none}}
 </style></head><body><canvas id="space"></canvas><canvas id="spark"></canvas>
 <section id="intro" class="scene active"><canvas id="planetDust" aria-hidden="true"></canvas><div class="glow"></div><div class="home-group"><div class="home-label">Giữ để bắt đầu</div><button id="home" class="home" aria-label="Giữ để bắt đầu"><span class="progress"></span></button></div></section>
 <section id="words" class="scene"></section>
@@ -195,47 +270,47 @@
 // Dense pink/purple dust cloud orbiting the white planet; only visible on the intro.
 const dustCanvas=document.getElementById('planetDust');
 const dustCtx=dustCanvas.getContext('2d',{alpha:true});
-let dustWidth=0,dustHeight=0,dustRatio=1,dustMotes=[];
+let dustWidth=0,dustHeight=0,dustRatio=1,dustMotes=[],ambientMotes=[];
 function resizePlanetDust(){
  const rect=dustCanvas.getBoundingClientRect();dustWidth=rect.width;dustHeight=rect.height;
  dustRatio=Math.min(devicePixelRatio||1,2);dustCanvas.width=Math.round(dustWidth*dustRatio);dustCanvas.height=Math.round(dustHeight*dustRatio);
  dustCtx.setTransform(dustRatio,0,0,dustRatio,0,0);
- const count=Math.min(2600,Math.max(900,Math.floor(dustWidth*dustHeight/420)));
- dustMotes=Array.from({length:count},()=>({angle:Math.random()*Math.PI*2,ring:Math.pow(Math.random(),.66),speed:(Math.random()*.00024+.00006)*(Math.random()<.5?-1:1),size:Math.random()*.85+.25,phase:Math.random()*7,tint:Math.random()}));
+ const count=Math.min(18000,Math.max(5500,Math.floor(dustWidth*dustHeight/72)));
+ dustMotes=Array.from({length:count},()=>({angle:Math.random()*Math.PI*2,ring:Math.sqrt(Math.random()),speed:(Math.random()*.00014+.000025)*(Math.random()<.5?-1:1),size:Math.random()*.62+.18,phase:Math.random()*7,tint:Math.random()}));
+ ambientMotes=Array.from({length:Math.min(32000,Math.max(10000,Math.floor(dustWidth*dustHeight/33)))},()=>({x:Math.random()*dustWidth,y:Math.random()*dustHeight,size:Math.random()*.75+.16,phase:Math.random()*6.28,speed:Math.random()*.10+.018,alpha:Math.random()*.45+.12,pink:Math.random()<.96}));
 }
 resizePlanetDust();window.addEventListener('resize',resizePlanetDust,{passive:true});
 function drawPlanetDust(time){
  if(document.getElementById('intro').classList.contains('active')){
  dustCtx.clearRect(0,0,dustWidth,dustHeight);
- const cx=dustWidth*.5,cy=dustHeight*.49;
- const rx=Math.min(dustWidth*.38,310),ry=Math.min(dustHeight*.23,175);
+ const cx=dustWidth*.5,cy=dustHeight*.65;
+ const rx=Math.min(dustWidth*.46,500),ry=Math.min(dustHeight*.42,360);
  // Soft violet/pink nebula glow, concentrated around the planet.
  const haze=dustCtx.createRadialGradient(cx,cy,5,cx,cy,Math.max(rx,ry)*1.08);
- haze.addColorStop(0,'rgba(255,188,226,.23)');haze.addColorStop(.28,'rgba(255,142,207,.16)');haze.addColorStop(.65,'rgba(255,129,194,.055)');haze.addColorStop(1,'rgba(0,0,0,0)');
+ haze.addColorStop(0,'rgba(255,200,226,.16)');haze.addColorStop(.28,'rgba(255,142,207,.09)');haze.addColorStop(.65,'rgba(255,129,194,.025)');haze.addColorStop(1,'rgba(0,0,0,0)');
  dustCtx.fillStyle=haze;dustCtx.beginPath();dustCtx.ellipse(cx,cy,rx*1.2,ry*1.5,0,0,Math.PI*2);dustCtx.fill();
- // Gentle evenly scattered pale-pink microdust, without obscuring the center.
- for(let i=0;i<500;i++){
-  const xx=(i*137.508+dustWidth*.003*Math.sin(time*.00014+i))%dustWidth;
-  const yy=(i*79.719+time*.004*(.3+(i%5)*.1))%dustHeight;
-  const aa=.10+.18*(.5+.5*Math.sin(time*.0017+i*1.7));
-  dustCtx.fillStyle=`rgba(255,166,213,${aa})`;
-  dustCtx.fillRect(xx,yy,.45,.45);
+ // Fine pink stars across the entire screen, with a soft downward drift.
+ for(const m of ambientMotes){
+  const yy=(m.y+time*m.speed*.012)%dustHeight;
+  const twinkle=.65+.35*Math.sin(time*.0015+m.phase);
+  dustCtx.fillStyle=m.pink?`rgba(255,116,188,${m.alpha*twinkle})`:`rgba(255,239,249,${m.alpha*twinkle})`;
+  dustCtx.fillRect(m.x,yy,m.size,m.size);
  }
  for(const m of dustMotes){
  const a=m.angle+time*m.speed, radial=.10+m.ring*.90;
  const x=cx+Math.cos(a)*rx*radial;
- const y=cy+Math.sin(a)*ry*radial*.73+Math.sin(a*2+m.phase)*7*radial;
+ const y=cy+Math.sin(a)*ry*radial*.92+Math.sin(a*2+m.phase)*7*radial;
  const twinkle=.5+.5*Math.sin(time*.002+m.phase*4);
- const alpha=(.25+.65*twinkle)*(1-m.ring*.45);
- dustCtx.fillStyle=m.tint<.55?`rgba(255,177,218,${alpha})`:`rgba(255,143,204,${alpha})`;
- dustCtx.beginPath();dustCtx.arc(x,y,m.size,0,Math.PI*2);dustCtx.fill();
+ const alpha=(.18+.66*twinkle)*(1-m.ring*.32);
+ dustCtx.fillStyle=m.tint<.55?`rgba(255,174,218,${alpha})`:`rgba(255,113,190,${alpha})`;
+ dustCtx.fillRect(x,y,Math.max(.5,m.size),Math.max(.5,m.size));
  }
  }else{dustCtx.clearRect(0,0,dustWidth,dustHeight)}
  requestAnimationFrame(drawPlanetDust);
 }
 requestAnimationFrame(drawPlanetDust);
 const $=id=>document.getElementById(id);const sceneIds=['intro','words','sphereScene','gallery','giftScene'];let stage=0,wordRunning=false;function show(n){stage=n;sceneIds.forEach((id,i)=>$(id).classList.toggle('active',i===n));$('replay').classList.toggle('hidden',n<2);if(n===1)runWords();if(n===2)startSphereGather();if(n===3)makeGallery();if(n===4)makeCurtain()}
-const canvas=$('space'),ctx=canvas.getContext('2d'),fx=$('spark'),fctx=fx.getContext('2d');let W=0,H=0,DPR=1,stars=[],meteors=[],fireworks=[],particles=[],targets=[],wordOpacity=1;const rand=(a,b)=>a+Math.random()*(b-a);function resize(){W=innerWidth;H=innerHeight;DPR=Math.min(devicePixelRatio||1,2);for(const c of [canvas,fx]){c.width=Math.round(W*DPR);c.height=Math.round(H*DPR);c.style.width=W+'px';c.style.height=H+'px';c.getContext('2d').setTransform(DPR,0,0,DPR,0,0)}stars=Array.from({length:Math.min(18000,Math.max(5500,Math.floor(W*H/70)))},()=>({x:rand(0,W),y:rand(0,H),r:rand(.10,.65),a:rand(.12,.9),v:rand(.12,.85),phase:rand(0,7),pink:Math.random()<.72}));if(stage===1&&currentWord)makeText(currentWord)}addEventListener('resize',resize);resize();let lastFire=0,lastMeteor=0,fireColor=0;function burst(x,y,amount=36){const palette=[0,205,275,125,35,315];const baseHue=palette[fireColor++%palette.length];for(let i=0;i<amount;i++){const angle=Math.PI*2*i/amount+rand(-.06,.06),speed=rand(.65,2.35);fireworks.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:rand(32,65),max:65,hue:baseHue+rand(-9,9),r:rand(.45,1.25)})}}let heartSparks=[],lastHeartBurst=0;
+const canvas=$('space'),ctx=canvas.getContext('2d'),fx=$('spark'),fctx=fx.getContext('2d');let W=0,H=0,DPR=1,stars=[],meteors=[],fireworks=[],particles=[],targets=[],wordOpacity=1;const rand=(a,b)=>a+Math.random()*(b-a);function resize(){W=innerWidth;H=innerHeight;DPR=Math.min(devicePixelRatio||1,2);for(const c of [canvas,fx]){c.width=Math.round(W*DPR);c.height=Math.round(H*DPR);c.style.width=W+'px';c.style.height=H+'px';c.getContext('2d').setTransform(DPR,0,0,DPR,0,0)}stars=Array.from({length:Math.min(23000,Math.max(6500,Math.floor(W*H/48)))},()=>({x:rand(0,W),y:rand(0,H),r:rand(.10,.65),a:rand(.12,.9),v:rand(.12,.85),phase:rand(0,7),pink:Math.random()<.90}));if(stage===1&&currentWord)makeText(currentWord)}addEventListener('resize',resize);resize();let lastFire=0,lastMeteor=0,fireColor=0;function burst(x,y,amount=36){const palette=[0,205,275,125,35,315];const baseHue=palette[fireColor++%palette.length];for(let i=0;i<amount;i++){const angle=Math.PI*2*i/amount+rand(-.06,.06),speed=rand(.65,2.35);fireworks.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:rand(32,65),max:65,hue:baseHue+rand(-9,9),r:rand(.45,1.25)})}}let heartSparks=[],lastHeartBurst=0;
 function pinkHeartFirework(x,y){
  const n=44,scale=Math.min(W,H)*.0042;
  for(let i=0;i<n;i++){
@@ -283,33 +358,43 @@ function makeText(message){
  requestAnimationFrame(fadeIn);
 }
 async function runWords(){if(wordRunning)return;wordRunning=true;for(const word of ['GỬI EM','NGƯỜI ANH YÊU NHẤT','MÃI BÊN EM']){if(stage!==1)break;currentWord=word;makeText(word);await sleep(4200);for(let i=0;i<=90&&stage===1;i++){const u=i/90;wordOpacity=1-u*u*(3-2*u);await sleep(27)}await sleep(200)}wordRunning=false;if(stage===1){currentWord='';targets=[];particles=[];show(2)}}
-const images=Array.from({length:20},(_,i)=>`https://picsum.photos/seed/love-memory-${i+101}/400/520`);let sphereMade=false;function makeSphere(){if(sphereMade)return;sphereMade=true;
-const el=$('sphere');const radius=Math.max(105,Math.min(W*.37,H*.33,265));
-// Nine latitude rings and staggered longitude tiles. Repeat the original 20 images
-// to create a tightly covered spherical shell, not just 20 isolated floating cards.
-const rings=11,columns=24;
-const tileW=2*Math.PI*radius/columns*1.19;
-const tileH=Math.PI*radius/(rings-1)*1.22;
-el.style.setProperty('--photo-size',tileW.toFixed(2)+'px');
-for(let r=0;r<rings;r++){
- const latitude=-Math.PI/2+(r+.5)*Math.PI/rings;
- const y=Math.sin(latitude),ringRadius=Math.cos(latitude);
- const number=Math.max(6,Math.round(columns*ringRadius));
- for(let c=0;c<number;c++){
-  const longitude=2*Math.PI*(c+(r%2)*.5)/number;
-  const x=Math.sin(longitude)*ringRadius,z=Math.cos(longitude)*ringRadius;
-  const yaw=longitude*180/Math.PI;
-  const pitch=-latitude*180/Math.PI;
-  const d=document.createElement('div');d.className='photo sphere-tile';
-  d.style.width=(2*Math.PI*radius*ringRadius/number*1.16).toFixed(2)+'px';
-  d.style.height=tileH.toFixed(2)+'px';
-  d.style.aspectRatio='auto';d.style.borderRadius='3px';d.style.border='1px solid #ffb6db55';
-  d.style.setProperty('--pos',`translate3d(${(x*radius).toFixed(2)}px,${(-y*radius).toFixed(2)}px,${(z*radius).toFixed(2)}px) rotateY(${yaw.toFixed(2)}deg) rotateX(${pitch.toFixed(2)}deg)`);
-  d.style.setProperty('--scatter',`translate3d(${rand(-W*.8,W*.8)}px,${rand(-H*.8,H*.8)}px,${rand(-500,500)}px) rotate(${rand(-160,160)}deg)`);
-  const img=document.createElement('img');img.src=images[(r*columns+c)%20];img.alt=`Kỷ niệm ${(r*columns+c)%20+1}`;img.loading='lazy';d.append(img);el.append(d);
+const images=Array.from({length:20},(_,i)=>`https://picsum.photos/seed/love-memory-${i+101}/400/520`);
+let sphereMade=false;
+function makeSphere(){
+ if(sphereMade)return;
+ sphereMade=true;
+ const el=$('sphere');
+ // Photo mosaic follows a true sphere: ring circumference shrinks toward poles.
+ // Tangent tiles overlap by a few percent so the rotating globe has no black seams.
+ const radius=Math.min(365,Math.max(112,Math.min(W*.405,H*.425)));
+ const rings=13, equatorColumns=27;
+ for(let r=0;r<rings;r++){
+  const lat=-Math.PI/2+(r+.5)*Math.PI/rings;
+  const ringScale=Math.cos(lat);
+  const count=Math.max(5,Math.round(equatorColumns*ringScale));
+  const tileWidth=2*Math.PI*radius*ringScale/count*1.095;
+  const tileHeight=Math.PI*radius/rings*1.11;
+  for(let c=0;c<count;c++){
+   const lon=2*Math.PI*(c+(r%2)*.5)/count;
+   const x=radius*ringScale*Math.sin(lon);
+   const y=-radius*Math.sin(lat);
+   const z=radius*ringScale*Math.cos(lon);
+   const tile=document.createElement('div');
+   tile.className='photo sphere-tile';
+   tile.style.width=tileWidth.toFixed(2)+'px';
+   tile.style.height=tileHeight.toFixed(2)+'px';
+   tile.style.aspectRatio='auto';
+   // Match the outward normal to the actual spherical coordinate.
+   tile.style.setProperty('--pos',`translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,${z.toFixed(2)}px) rotateY(${(lon*180/Math.PI).toFixed(3)}deg) rotateX(${(lat*180/Math.PI).toFixed(3)}deg)`);
+   tile.style.setProperty('--scatter',`translate3d(${rand(-W*.8,W*.8)}px,${rand(-H*.8,H*.8)}px,${rand(-500,500)}px) rotate(${rand(-160,160)}deg)`);
+   const img=document.createElement('img');
+   img.src=images[(r*equatorColumns+c)%images.length];
+   img.alt='Ảnh kỷ niệm';img.loading='lazy';
+   tile.append(img);el.append(tile);
+  }
  }
 }
-}
+
 let sphereGathered=false;
 function startSphereGather(){
  makeSphere();
@@ -324,7 +409,26 @@ function startSphereGather(){
  setTimeout(()=>el.classList.remove('gathering'),3400);
 }
 let sphereOpened=false;function openSphere(){if(stage!==2||sphereOpened)return;sphereOpened=true;$('sphere').classList.add('scatter');burst(W/2,H/2,150);setTimeout(()=>show(3),2200)}$('sphere').addEventListener('click',openSphere);$('sphere').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openSphere()}});
-let galleryMade=false;function makeGallery(){if(galleryMade)return;galleryMade=true;const root=$('rows');for(let r=0;r<3;r++){const lane=document.createElement('div');lane.className='lane';const subset=images.slice(r*5,r*5+5);for(let rep=0;rep<2;rep++)for(const src of subset){const img=document.createElement('img');img.src=src;img.alt='Ảnh kỷ niệm';img.loading='lazy';lane.append(img)}root.append(lane)}}let galleryTransitioning=false;
+let galleryMade=false;
+function makeGallery(){
+ if(galleryMade)return;
+ galleryMade=true;
+ const root=$('rows');
+ for(let r=0;r<3;r++){
+  const lane=document.createElement('div');lane.className='lane';
+  const subset=images.slice(r*5,r*5+5);
+  // Two identical groups, with no extra spacing at the seam: seamless infinite motion.
+  for(let repeat=0;repeat<2;repeat++){
+   const group=document.createElement('div');group.className='lane-group';
+   for(const src of subset){
+    const img=document.createElement('img');img.src=src;img.alt='Ảnh kỷ niệm';img.loading='lazy';group.append(img);
+   }
+   lane.append(group);
+  }
+  root.append(lane);
+ }
+}
+let galleryTransitioning=false;
 function galleryToGift(){
  if(stage!==3||galleryTransitioning)return;
  galleryTransitioning=true;
@@ -387,3 +491,4 @@ const letterText="Anh thích em, thương em, như vậy có là sai không?\n\n
 let typingTimer=null,openTimer=null;function openLoveLetter(){const gift=$('gift'),overlay=$('overlay'),target=$('typedLetter');if(gift.classList.contains('opening'))return;gift.classList.add('opening');if(openTimer)clearTimeout(openTimer);openTimer=setTimeout(()=>{overlay.classList.add('open');target.textContent='';$('typingCursor').style.display='inline';if(typingTimer)clearInterval(typingTimer);let index=0;typingTimer=setInterval(()=>{index=Math.min(index+4,letterText.length);target.textContent=letterText.slice(0,index);if(index>=letterText.length){clearInterval(typingTimer);typingTimer=null;$('typingCursor').style.display='none'}},18);gift.classList.remove('opening');burst(W/2,H/2,35)},760)}
 $('gift').addEventListener('click',openLoveLetter);$('close').addEventListener('click',()=>$('overlay').classList.remove('open'));$('overlay').addEventListener('click',e=>{if(e.target===$('overlay'))$('overlay').classList.remove('open')});$('replay').addEventListener('click',()=>location.reload());document.addEventListener('keydown',e=>{if(e.key==='Escape')$('overlay').classList.remove('open')});})();
 </script></body></html>
+
